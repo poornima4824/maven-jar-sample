@@ -21,7 +21,7 @@ tools {
             steps {
              script {
                   def readPom = readMavenPom file: 'pom.xml'
-                  //def nexusrepo = readPom.version.endsWith("SNAPSHOT") ? "maven-snapshots" : "maven-releases"
+                  def nexusrepo = readPom.version.endsWith("SNAPSHOT") ? "maven-snapshots" : "maven-releases"
                   nexusArtifactUploader artifacts: 
                   [
                       [
@@ -37,7 +37,7 @@ tools {
                           nexusVersion: 'nexus3', 
                           protocol: 'http', 
                           repository: "Rollback_mechanism", 
-                          version: "${GIT_COMMIT}"
+                          version: "${readPom.version}"
 
              }
           }
