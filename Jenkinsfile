@@ -7,7 +7,7 @@ tools {
         stage('Code checkout') {
             steps {
                 script {
-                    checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/poornima4824/Java-CI-CD-pipeline.git']]])
+                    checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/poornima4824/maven-jar-sample.git']]])
                 
                 } 
             }
