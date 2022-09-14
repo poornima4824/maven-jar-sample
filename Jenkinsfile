@@ -27,7 +27,7 @@ tools {
                       [
                           artifactId: "${readPom.artifactId}",
                           classifier: '', 
-                          file: "target/maven-jar-sample-1.0.jar", 
+                          file: "target/build_artifact-1.0.jar", 
                           type: 'jar'
                       ]
                  ], 
