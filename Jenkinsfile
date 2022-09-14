@@ -17,27 +17,30 @@ tools {
                 sh "mvn clean package"
             }
         }
-        stage('Upload Artifacts To Nexus') {
+        stage('Nexus Upload') {
             steps {
-                script {
-                    nexusArtifactUploader artifacts:
-                    [
-                        [
-                            artifactId: 'build_artifact',
-                            classifier: '',
-                            file: "target/maven-jar-sample-1.0.jar",
-                            type: 'war'
-                        ]
-                    ],
-                    credentialsId: 'nexus',
-                    groupId: 'build',
-                    nexusUrl: '3.144.132.81:8081',
-                    nexusVersion: 'nexus3',
-                    protocol: 'http',
-                    repository: 'Rollback_mechanism',
-                    version: "${GIT_COMMIT}"
-                }
-            }
-        }
+             script {
+                  def readPom = readMavenPom file: 'pom.xml'
+                  //def nexusrepo = readPom.version.endsWith("SNAPSHOT") ? "maven-snapshots" : "maven-releases"
+                  nexusArtifactUploader artifacts: 
+                  [
+                      [
+                          artifactId: "${readPom.artifactId}",
+                          classifier: '', 
+                          file: "target/${readPom.artifactId}-${readPom.version}.jar", 
+                          type: 'war'
+                      ]
+                 ], 
+                         credentialsId: 'nexus', 
+                          groupId: "${readPom.groupId}", 
+                          nexusUrl: '3.144.132.81:8081', 
+                          nexusVersion: 'nexus3', 
+                          protocol: 'http', 
+                          repository: "Rollback_mechanism", 
+                          version: "${GIT_COMMIT}"
+
+             }
+          }
+      }
     }
 }
