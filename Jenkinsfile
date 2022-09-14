@@ -17,5 +17,27 @@ tools {
                 sh "mvn clean package"
             }
         }
+        stage('Upload Artifacts To Nexus') {
+            steps {
+                script {
+                    nexusArtifactUploader artifacts:
+                    [
+                        [
+                            artifactId: 'build_artifact',
+                            classifier: '',
+                            file: "target/maven-jar-sample-1.0-SNAPSHOT.jar",
+                            type: 'war'
+                        ]
+                    ],
+                    credentialsId: 'nexus',
+                    groupId: 'build',
+                    nexusUrl: '3.144.132.81:8081',
+                    nexusVersion: 'nexus3',
+                    protocol: 'http',
+                    repository: 'Rollback_mechanism',
+                    version: "${GIT_COMMIT}"
+                }
+            }
+        }
     }
 }
