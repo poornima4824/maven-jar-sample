@@ -27,8 +27,8 @@ tools {
                       [
                           artifactId: "${readPom.artifactId}",
                           classifier: '', 
-                          file: "target/${readPom.artifactId}-${readPom.version}.jar", 
-                          type: 'war'
+                          file: "target/maven-jar-sample-1.0.jar", 
+                          type: 'jar'
                       ]
                  ], 
                          credentialsId: 'nexus', 
