@@ -25,7 +25,7 @@ tools {
                         [
                             artifactId: 'build_artifact',
                             classifier: '',
-                            file: "target/maven-jar-sample-1.0-SNAPSHOT.jar",
+                            file: "target/maven-jar-sample-1.0.jar",
                             type: 'war'
                         ]
                     ],
